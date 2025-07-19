@@ -2,41 +2,73 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+/* Web3 Crypto Dashboard Design System - Dark Theme Optimized
 All colors MUST be HSL.
 */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Core Colors - Crypto Dark Theme */
+    --background: 222 13% 9%;
+    --foreground: 210 40% 98%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 222 17% 11%;
+    --card-foreground: 210 40% 98%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 222 17% 11%;
+    --popover-foreground: 210 40% 98%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Crypto Primary - Electric Blue */
+    --primary: 215 85% 60%;
+    --primary-foreground: 222 13% 9%;
+    --primary-glow: 215 85% 70%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Secondary - Deep Purple */
+    --secondary: 252 56% 15%;
+    --secondary-foreground: 210 40% 98%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 222 13% 17%;
+    --muted-foreground: 215 20% 65%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Accent - Neon Green for gains */
+    --accent: 142 76% 36%;
+    --accent-foreground: 210 40% 98%;
 
-    --destructive: 0 84.2% 60.2%;
+    /* Destructive - Red for losses */
+    --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 222 13% 17%;
+    --input: 222 13% 17%;
+    --ring: 215 85% 60%;
 
-    --radius: 0.5rem;
+    /* Crypto Specific Colors */
+    --ethereum: 228 84% 60%;
+    --polygon: 280 89% 65%;
+    --arbitrum: 225 100% 72%;
+    
+    /* Status Colors */
+    --success: 142 76% 36%;
+    --warning: 45 100% 51%;
+    --error: 0 84% 60%;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(215 85% 60%), hsl(252 56% 55%));
+    --gradient-ethereum: linear-gradient(135deg, hsl(228 84% 60%), hsl(228 84% 45%));
+    --gradient-polygon: linear-gradient(135deg, hsl(280 89% 65%), hsl(280 89% 45%));
+    --gradient-arbitrum: linear-gradient(135deg, hsl(225 100% 72%), hsl(225 100% 55%));
+    --gradient-glow: linear-gradient(135deg, hsl(215 85% 60% / 0.3), hsl(252 56% 55% / 0.3));
+
+    /* Shadows */
+    --shadow-crypto: 0 10px 30px -5px hsl(215 85% 60% / 0.3);
+    --shadow-glow: 0 0 40px hsl(215 85% 70% / 0.4);
+    --shadow-card: 0 4px 20px hsl(222 13% 5% / 0.5);
+
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-glow: box-shadow 0.3s ease-in-out;
+
+    --radius: 0.75rem;
 
     --sidebar-background: 0 0% 98%;
 
@@ -56,41 +88,24 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
+    /* Dark mode uses same colors as our crypto theme is dark by default */
+    --background: 222 13% 9%;
     --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --card: 222 17% 11%;
+    --primary: 215 85% 60%;
+    --secondary: 252 56% 15%;
+    --muted: 222 13% 17%;
+    --accent: 142 76% 36%;
+    --border: 222 13% 17%;
+    
+    --sidebar-background: 222 17% 11%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 215 85% 60%;
+    --sidebar-primary-foreground: 222 13% 9%;
+    --sidebar-accent: 252 56% 15%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 222 13% 17%;
+    --sidebar-ring: 215 85% 60%;
   }
 }
 
@@ -100,6 +115,79 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-mono;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--muted));
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--primary));
+    border-radius: 4px;
+  }
+
+  /* Crypto utility classes */
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+
+  .gradient-ethereum {
+    background: var(--gradient-ethereum);
+  }
+
+  .gradient-polygon {
+    background: var(--gradient-polygon);
+  }
+
+  .gradient-arbitrum {
+    background: var(--gradient-arbitrum);
+  }
+
+  .shadow-crypto {
+    box-shadow: var(--shadow-crypto);
+  }
+
+  .shadow-glow {
+    box-shadow: var(--shadow-glow);
+  }
+
+  .transition-smooth {
+    transition: var(--transition-smooth);
+  }
+
+  .crypto-glow {
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.5);
+  }
+
+  .crypto-pulse {
+    animation: crypto-pulse 2s infinite;
+  }
+
+  @keyframes crypto-pulse {
+    0%, 100% {
+      box-shadow: 0 0 20px hsl(var(--primary) / 0.3);
+    }
+    50% {
+      box-shadow: 0 0 30px hsl(var(--primary) / 0.6);
+    }
+  }
+
+  /* Gas price status colors */
+  .gas-low {
+    color: hsl(var(--success));
+  }
+
+  .gas-medium {
+    color: hsl(var(--warning));
+  }
+
+  .gas-high {
+    color: hsl(var(--error));
   }
 }

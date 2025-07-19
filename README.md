@@ -1,73 +1,149 @@
-# Welcome to your Lovable project
+# 🚀 Cross-Chain Gas Tracker
 
-## Project info
+**Real-Time Gas Price Monitoring & Transaction Cost Simulation**
 
-**URL**: https://lovable.dev/projects/069657f4-da62-4593-b360-1b952eb31863
+A comprehensive Web3 dashboard that provides real-time gas price tracking across Ethereum, Polygon, and Arbitrum, with transaction cost simulation and live USD pricing from Uniswap V3.
 
-## How can I edit this code?
+## ✨ Features
 
-There are several ways of editing your application.
+### 🔴 **Live Mode**
+- **Real-time gas tracking** across 3 major chains using WebSocket connections
+- **Live ETH/USD pricing** directly from Uniswap V3 Swap events 
+- **Interactive candlestick charts** showing 15-minute gas price volatility
+- **Auto-updating dashboard** with 6-second refresh intervals
 
-**Use Lovable**
+### ⚡ **Simulation Mode**
+- **Transaction cost calculator** for any amount and gas limit
+- **Cross-chain comparison** showing cheapest/most expensive options
+- **Real-time savings calculation** between chains
+- **Smart presets** for common transaction types (transfers, swaps, NFT mints)
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/069657f4-da62-4593-b360-1b952eb31863) and start prompting.
+### 🎨 **Beautiful UI**
+- **Crypto-optimized dark theme** with neon accents and gradients
+- **Real-time status indicators** with pulsing animations
+- **Responsive design** optimized for all screen sizes
+- **Smooth transitions** and hover effects throughout
 
-Changes made via Lovable will be committed automatically to this repo.
+## 🛠️ Technical Implementation
 
-**Use your preferred IDE**
+### **Real-Time Data Architecture**
+- **WebSocket Providers**: Direct connections to Ethereum, Polygon, and Arbitrum RPCs
+- **Uniswap V3 Integration**: Live ETH/USD pricing from `sqrtPriceX96` values
+- **State Management**: Zustand with complex state machine handling live/simulation modes
+- **Data Processing**: 15-minute candlestick aggregation with historical data storage
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### **Key Complexities Solved**
+✅ **Priority Fee Calculation**: Chain-specific gas mechanics (Arbitrum L1 costs, Polygon fee structure)  
+✅ **Real-time USD Pricing**: Direct Uniswap V3 event parsing without external APIs  
+✅ **WebSocket Management**: Auto-reconnection and error handling for stable connections  
+✅ **State Synchronization**: Shared state between chart visualization and gas widgets  
+✅ **Gas Simulations**: Accurate cost calculations including base fees and priority fees  
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### **Tech Stack**
+- **Frontend**: React + TypeScript + Vite
+- **Web3**: Ethers.js v6 with WebSocket providers
+- **Charts**: Lightweight Charts for candlestick visualization
+- **State**: Zustand with middleware for complex state management
+- **UI**: shadcn/ui + Tailwind CSS with custom crypto theme
+- **Real-time**: WebSocket connections to chain RPCs + Uniswap event monitoring
 
-Follow these steps:
+## 🚀 Quick Start
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+```bash
+# Clone the repository
+git clone <repository-url>
+cd cross-chain-gas-tracker
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+# Install dependencies
+npm install
 
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Start development server
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+The app will be available at `http://localhost:8080`
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## 📊 How It Works
 
-**Use GitHub Codespaces**
+### **Gas Price Tracking**
+1. WebSocket connections to each chain's RPC endpoint
+2. Real-time block monitoring for `baseFeePerGas` extraction
+3. Priority fee estimation using `getFeeData()` calls
+4. Historical data aggregation for trend analysis
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+### **USD Price Calculation**
+1. Monitor Uniswap V3 ETH/USDC pool (`0x88e6A0c2dDD26FEEb64F039a2c41296FcB3f5640`)
+2. Parse `Swap` events to extract `sqrtPriceX96` values
+3. Convert using formula: `price = (sqrtPriceX96²×10¹²) / 2¹⁹²`
+4. Real-time price updates every 30 seconds + live event monitoring
 
-## What technologies are used for this project?
+### **Transaction Simulation**
+1. User inputs: amount, token, gas limit
+2. Real-time cost calculation: `(baseFee + priorityFee) × gasLimit × ethPrice`
+3. Cross-chain comparison with savings calculation
+4. Estimated confirmation time based on priority fee levels
 
-This project is built with:
+## 🎯 Demo Scenarios
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+Try these scenarios to see the dashboard in action:
 
-## How can I deploy this project?
+1. **ETH Transfer (21,000 gas)**: Compare simple transfer costs
+2. **DEX Swap (150,000 gas)**: See how complex transactions cost more
+3. **NFT Mint (200,000 gas)**: Experience high gas limit scenarios
+4. **Live Mode**: Watch real-time gas price fluctuations
+5. **Chart Analysis**: Observe 15-minute candlestick patterns
 
-Simply open [Lovable](https://lovable.dev/projects/069657f4-da62-4593-b360-1b952eb31863) and click on Share -> Publish.
+## 🌐 Live Demo
 
-## Can I connect a custom domain to my Lovable project?
+**Hosted URL**: [View Live Demo](https://lovable.dev/projects/069657f4-da62-4593-b360-1b952eb31863)
 
-Yes, you can!
+## 📈 Key Metrics Tracked
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+- **Base Fee**: EIP-1559 base fee per gas (gwei)
+- **Priority Fee**: Miner tip for faster inclusion (gwei)  
+- **Total Gas Cost**: Combined fee × gas limit in USD
+- **ETH/USD Price**: Live price from Uniswap V3
+- **Chain Status**: Real-time connection monitoring
+- **Transaction Time**: Estimated confirmation time
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+## 🔧 Configuration
+
+The app uses demo RPC endpoints by default. For production use:
+
+1. Replace RPC URLs in `src/services/web3Service.ts`
+2. Add your own Alchemy/Infura API keys
+3. Configure environment variables for different chains
+
+## 📚 Architecture Deep Dive
+
+### **Zustand State Machine**
+```typescript
+interface GasState {
+  mode: 'live' | 'simulation';
+  chains: { ethereum, polygon, arbitrum };
+  ethUsdPrice: number;
+  simulation: { input, results };
+  // Complex state mutations with history management
+}
+```
+
+### **Real-time Data Flow**
+```
+WebSocket → Block Events → Gas Extraction → Zustand Store → UI Updates
+Uniswap V3 → Swap Events → Price Calculation → Store → Price Display
+```
+
+### **Chart Integration**
+- Lightweight Charts for high-performance visualization
+- Real-time candlestick data generation from gas history
+- 15-minute interval aggregation with OHLC calculation
+
+## 🤝 Contributing
+
+This project demonstrates advanced Web3 frontend development patterns:
+- Real-time blockchain data integration
+- Complex state management for live/simulation modes  
+- Professional UI/UX for crypto applications
+- Performance-optimized chart visualizations
+
+Feel free to extend with additional chains, improve gas estimation algorithms, or enhance the visualization features!
