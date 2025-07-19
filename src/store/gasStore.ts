@@ -172,16 +172,27 @@ export const useGasStore = create<GasState>()(
       const { amount, gasLimit } = simulation.input;
       
       const results: SimulationResult[] = Object.entries(chains).map(([chainKey, chainData]) => {
-        const totalGasFee = (chainData.baseFee + chainData.priorityFee) * gasLimit;
+        // Use current gas data or fallback to minimum values if not connected
+        const baseFee = chainData.baseFee > 0 ? chainData.baseFee : (chainKey === 'polygon' ? 30 : chainKey === 'arbitrum' ? 0.1 : 10);
+        const priorityFee = chainData.priorityFee > 0 ? chainData.priorityFee : (chainKey === 'polygon' ? 30 : chainKey === 'arbitrum' ? 0.1 : 2);
+        
+        const totalGasFee = (baseFee + priorityFee) * gasLimit;
         const gasCostETH = totalGasFee / 1e9; // Convert from gwei to ETH
         const gasCostUSD = gasCostETH * ethUsdPrice;
         const transactionValueUSD = parseFloat(amount) * ethUsdPrice;
         const totalCostUSD = gasCostUSD + transactionValueUSD;
         
-        // Estimate confirmation time based on gas price level
+        // Estimate confirmation time based on chain and gas price level
         let estimatedTime = '~2 mins';
-        if (chainData.priorityFee < 1) estimatedTime = '~5 mins';
-        else if (chainData.priorityFee > 5) estimatedTime = '~30 secs';
+        if (chainKey === 'polygon') {
+          estimatedTime = '~2 secs';
+        } else if (chainKey === 'arbitrum') {
+          estimatedTime = '~1-2 mins';
+        } else {
+          // Ethereum
+          if (priorityFee < 1) estimatedTime = '~5 mins';
+          else if (priorityFee > 5) estimatedTime = '~30 secs';
+        }
         
         return {
           chain: chainData.name,

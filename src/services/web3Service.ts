@@ -55,11 +55,11 @@ class Web3Service {
   }
 
   private getWebSocketUrl(chainKey: string): string {
-    // Using Alchemy demo endpoints - in production, use your own API keys
+    // Using public RPC endpoints
     const urls = {
-      ethereum: 'wss://eth-mainnet.ws.alchemyapi.io/v2/demo',
-      polygon: 'wss://polygon-mainnet.ws.alchemyapi.io/v2/demo',
-      arbitrum: 'wss://arb-mainnet.ws.alchemyapi.io/v2/demo'
+      ethereum: 'wss://ethereum-rpc.publicnode.com',
+      polygon: 'wss://polygon-bor-rpc.publicnode.com',
+      arbitrum: 'wss://arbitrum-one-rpc.publicnode.com'
     };
     
     return urls[chainKey as keyof typeof urls] || urls.ethereum;
